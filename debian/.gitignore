@@ -2,6 +2,4 @@ debhelper-build-stamp
 files
 *.debhelper.log
 *.substvars
-php-oauth2-server/
-
-
+php-fkooman-oauth2-server/
