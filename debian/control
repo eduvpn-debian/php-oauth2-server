@@ -10,7 +10,7 @@ Vcs-Git: git://github.com/eduvpn-debian/php-oauth2-server.git
 Vcs-Browser: https://github.com/eduvpn-debian/php-oauth2-server/
 
 Package: php-fkooman-oauth2-server
-Architecture: any
+Architecture: all
 Depends: ${misc:Depends}, php-common, php-json, php-libsodium,
  php-paragonie-constant-time-encoding, php-sqlite3
 Suggests: ${phpcomposer:Debian-suggest}
