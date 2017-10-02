@@ -1,3 +1,9 @@
+php-oauth2-server (1.1.0-2) stable; urgency=medium
+
+  * add missing dependencies
+
+ -- Gijs Molenaar (launchpad ppa build key) <gijs@pythonic.nl>  Mon, 02 Oct 2017 17:05:39 +0200
+
 php-oauth2-server (1.1.0-1) stable; urgency=medium
 
   [ Gijs Molenaar ]
