@@ -1,3 +1,12 @@
+php-oauth2-server (1.1.0-1) stable; urgency=medium
+
+  [ Gijs Molenaar ]
+  * New upstream version 1.1.0
+
+  [ Gijs Molenaar (launchpad ppa build key) ]
+
+ -- Gijs Molenaar (launchpad ppa build key) <gijs@pythonic.nl>  Mon, 02 Oct 2017 16:52:39 +0200
+
 php-oauth2-server (1.0.0-2) stable; urgency=medium
 
   * fix arch
