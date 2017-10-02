@@ -51,12 +51,14 @@ class BearerValidator
     public function __construct(Storage $storage, $keyPair)
     {
         $this->storage = $storage;
-        $this->publicKey = \Sodium\crypto_sign_publickey(Base64::decode($keyPair));
+        $this->publicKey = SodiumCompat::crypto_sign_publickey(Base64::decode($keyPair));
         $this->dateTime = new DateTime();
     }
 
     /**
      * @param DateTime $dateTime
+     *
+     * @return void
      */
     public function setDateTime(DateTime $dateTime)
     {
@@ -68,6 +70,8 @@ class BearerValidator
      * _NOT_ validated in the database.
      *
      * @param array $foreignKeys the Base64 encoded public key(s)
+     *
+     * @return void
      */
     public function setForeignKeys(array $foreignKeys)
     {
@@ -93,7 +97,7 @@ class BearerValidator
             $signedBearerToken = Base64::decode($bearerToken);
 
             // make sure access_token is signed by us
-            if (false !== $jsonToken = \Sodium\crypto_sign_open($signedBearerToken, $this->publicKey)) {
+            if (false !== $jsonToken = SodiumCompat::crypto_sign_open($signedBearerToken, $this->publicKey)) {
                 // as it is signed by us, it MUST exist in the DB as well,
                 // otherwise it was revoked...
                 $tokenInfo = $this->validateTokenInfo(json_decode($jsonToken, true));
@@ -107,7 +111,7 @@ class BearerValidator
             // it was not our signature, maybe it is one of the OPTIONAL
             // additionally configured public keys
             foreach ($this->foreignKeys as $tokenIssuer => $publicKey) {
-                if (false !== $jsonToken = \Sodium\crypto_sign_open($signedBearerToken, $publicKey)) {
+                if (false !== $jsonToken = SodiumCompat::crypto_sign_open($signedBearerToken, $publicKey)) {
                     $tokenInfo = $this->validateTokenInfo(json_decode($jsonToken, true));
                     $tokenInfo->setIssuer($tokenIssuer);
 
@@ -151,6 +155,8 @@ class BearerValidator
 
     /**
      * @param string $bearerCredentials
+     *
+     * @return void
      */
     private static function validateBearerCredentials($bearerCredentials)
     {
