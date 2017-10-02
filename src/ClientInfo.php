@@ -31,7 +31,7 @@ class ClientInfo
     /** @var string|null */
     private $displayName = null;
 
-    /** @var string[] */
+    /** @var array */
     private $redirectUriList;
 
     /** @var string */
@@ -94,7 +94,7 @@ class ClientInfo
      */
     public function isValidRedirectUri($redirectUri)
     {
-        if (in_array($redirectUri, $this->redirectUriList)) {
+        if (in_array($redirectUri, $this->redirectUriList, true)) {
             return true;
         }
 
@@ -119,16 +119,23 @@ class ClientInfo
         return false;
     }
 
+    /**
+     * @param string $clientRedirectUri
+     * @param string $redirectUri
+     *
+     * @return bool
+     */
     private static function portMatch($clientRedirectUri, $redirectUri)
     {
-        // XXX we really should not parse...this is bad
+        // there should be a better way...
         if (false === $port = parse_url($redirectUri, PHP_URL_PORT)) {
             return false;
         }
+        // only allow non-root ports
         if (!is_int($port) || 1024 > $port || 65535 < $port) {
             return false;
         }
-        $clientRedirectUriWithPort = str_replace('{PORT}', $port, $clientRedirectUri);
+        $clientRedirectUriWithPort = str_replace('{PORT}', (string) $port, $clientRedirectUri);
 
         return $redirectUri === $clientRedirectUriWithPort;
     }
