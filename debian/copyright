@@ -3,7 +3,7 @@ Upstream-Name: php-oauth2-server
 Source: https://github.com/eduvpn-debian/php-oauth2-server
 
 Files: *
-Copyright: 2017 Gijs Molenaar
+Copyright: 2016, 2017 François Kooman <fkooman@tuxed.net>
 License: MIT
 
 Files: debian/*
